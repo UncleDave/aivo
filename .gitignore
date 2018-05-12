@@ -7,3 +7,5 @@ bin/
 *.sln.DotSettings
 src/packages/
 packages/
+vs/
+.vs/

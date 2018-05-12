@@ -2,37 +2,32 @@
 
 namespace AivoTree
 {
-    public class SelectorNode<T> : TreeNode<T>
+    public class SelectorNode<T> : ITreeNode<T>
     {
-        private readonly TreeNode<T>[] _nodes;
-        private TreeNode<T> runningNode;
+        private readonly ITreeNode<T>[] _nodes;
+        private ITreeNode<T> _runningNode;
 
-        public SelectorNode(params TreeNode<T>[] nodes)
+        public SelectorNode(params ITreeNode<T>[] nodes)
         {
             _nodes = nodes;
         }
         
-        public AivoTreeStatus Tick(long timeTick, T context)
+        public AivoTreeStatus Tick(float timeTick, T context)
         {
-            var nodesToSearch = runningNode == null
+            var nodesToSearch = _runningNode == null
                 ? _nodes
-                : _nodes.SkipWhile(node => node != runningNode);
+                : _nodes.SkipWhile(node => node != _runningNode);
+
             return nodesToSearch.Aggregate(AivoTreeStatus.Failure, (acc, curr) =>
             {
-                if (acc != AivoTreeStatus.Success)       
-                {
-                    var result = curr.Tick(timeTick, context);
-                    if (result == AivoTreeStatus.Running)
-                    {
-                        runningNode = curr;
-                    }
-                    else
-                    {
-                        runningNode = null;
-                    }
-                    return result;
-                }
+              if (acc == AivoTreeStatus.Success)
                 return acc;
+
+              var result = curr.Tick(timeTick, context);
+
+              _runningNode = result == AivoTreeStatus.Running ? curr : null;
+
+              return result;
             });
         }
     }

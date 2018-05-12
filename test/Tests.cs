@@ -80,30 +80,30 @@ namespace Test
 
     public class MyModel
     {
-        public long value;
+        public float value;
     }
 
-    public class FailingNode : TreeNode<MyModel>
+    public class FailingNode : ITreeNode<MyModel>
     {
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             return AivoTreeStatus.Failure;
         }
     }
     
-    public class SucceedingNode : TreeNode<MyModel>
+    public class SucceedingNode : ITreeNode<MyModel>
     {
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             return AivoTreeStatus.Success;
         }
     }
     
-    public class RunOnceAndSucceedNextNode : TreeNode<MyModel>
+    public class RunOnceAndSucceedNextNode : ITreeNode<MyModel>
     {
         private bool alreadyRun;
         
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             if (!alreadyRun)
             {
@@ -114,11 +114,11 @@ namespace Test
         }
     }
     
-    public class FailOnceNode : TreeNode<MyModel>
+    public class FailOnceNode : ITreeNode<MyModel>
     {
         private bool alreadyRun;
         
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             if (!alreadyRun)
             {
@@ -129,11 +129,11 @@ namespace Test
         }
     }
     
-    public class SucceedOnceNode : TreeNode<MyModel>
+    public class SucceedOnceNode : ITreeNode<MyModel>
     {
         private bool alreadyRun;
         
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             if (!alreadyRun)
             {
@@ -144,9 +144,9 @@ namespace Test
         }
     }
     
-    public class ShouldNotRunNode : TreeNode<MyModel>
+    public class ShouldNotRunNode : ITreeNode<MyModel>
     {
-        public AivoTreeStatus Tick(long timeTick, MyModel context)
+        public AivoTreeStatus Tick(float timeTick, MyModel context)
         {
             throw new AssertionException("Should not be called");
         }

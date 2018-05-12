@@ -47,7 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aivo.csproj">
+    <ProjectReference Include="..\src\aivo.csproj">
       <Project>{9593E956-9720-48E4-B1C3-6A906AAEE949}</Project>
       <Name>aivo</Name>
     </ProjectReference>

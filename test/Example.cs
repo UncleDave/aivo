@@ -4,7 +4,7 @@ namespace Test
 {
     public class Example
     {
-        public static TreeNode<BotContext> createCounterAttackBehaviour()
+        public static ITreeNode<BotContext> createCounterAttackBehaviour()
         {
             var enoughManaToDeployUnit = new ActionNode<BotContext>((timeTick, ctx) => AivoTreeStatus.Success);
             var lessUnitsThanOpponent = new ActionNode<BotContext>((timeTick, ctx) => AivoTreeStatus.Success);

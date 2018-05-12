@@ -1,17 +1,18 @@
 ﻿namespace AivoTree
 {
-    public class InverterNode<T> : TreeNode<T>
+    public class InverterNode<T> : ITreeNode<T>
     {
-        private readonly TreeNode<T> node;
+        private readonly ITreeNode<T> _node;
 
-        public InverterNode(TreeNode<T> node)
+        public InverterNode(ITreeNode<T> node)
         {
-            this.node = node;
+            _node = node;
         }
         
-        public AivoTreeStatus Tick(long timeTick, T context)
+        public AivoTreeStatus Tick(float timeTick, T context)
         {
-            var status = node.Tick(timeTick, context);
+            var status = _node.Tick(timeTick, context);
+
             switch (status)
             {
                 case AivoTreeStatus.Success:

@@ -1,7 +1,7 @@
 ﻿namespace AivoTree
 {
-    public interface TreeNode<T>
+    public interface ITreeNode<T>
     {
-        AivoTreeStatus Tick(long timeTick, T context);
+        AivoTreeStatus Tick(float timeTick, T context);
     }
 }
